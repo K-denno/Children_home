@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'auth/',include('registration.backends.simple.urls'), name='login'),
     path(r'logout/', views.LogoutView, {"next_page": '/'}),
+    path(r'auth/',include('registration.backends.simple.urls'))
 ]
