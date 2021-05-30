@@ -19,4 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('children.urls')),
     path('admin/', admin.site.urls),
+    path(r'logout/', views.LogoutView, {"next_page": '/'}),
+    path(r'auth/',include('registration.backends.simple.urls')),
 ]
