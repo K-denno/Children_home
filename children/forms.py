@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Guardians, Children
 from django.contrib.auth.models import User
+from pyuploadcare.dj.forms import ImageField
+
 # from .models import Articles
 
 class SignUpForm(UserCreationForm):
@@ -16,11 +18,11 @@ class SignUpForm(UserCreationForm):
 
 class GuardiansForm(forms.ModelForm):
     class Meta:
-        models = Guardians
-        fields = ["name", "phoneNumber", "email", "idNumber", "location", "dp"]
+        model=Guardians
+        fields=["name", "phoneNumber", "email", "idNumber", "location", "dp"]
 
 
 class ChildrensForm(forms.ModelForm):
     class Meta:
-        models = Children
-        fields = ["name", "birth_cert_number", "birth_cert", "passport", "guardian"]
+        model=Children
+        fields=["name", "birth_cert_number", "birth_cert", "passport"]

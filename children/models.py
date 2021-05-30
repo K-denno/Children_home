@@ -29,7 +29,7 @@ class Guardians(models.Model):
     email = models.EmailField(max_length = 254)
     idNumber = models.BigIntegerField(null=True, unique=True)
     location = models.CharField(max_length=250)
-    dp = ImageField(manual_crop="1024x1024", blank=True)
+    dp = ImageField(manual_crop="", blank=True)
 
     class Meta:
         ordering = ["-id"]
@@ -50,7 +50,7 @@ class Children(models.Model):
     birth_cert = FileField(blank=True)
     passport = ImageField(manual_crop="1024x1024", blank=True)
     guardian = models.ForeignKey(Guardians, on_delete=models.CASCADE,
-        related_name='children')
+        related_name='children', null=True, blank=True)
 
 
     class Meta:

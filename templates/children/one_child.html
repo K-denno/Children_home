@@ -1,0 +1,34 @@
+{% extends 'common/base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+
+<div class="row">
+
+    <div class='col-md-4 col-xs-4 col-sm-4'>
+
+        <div class="card" id='{{post.id}}'style="width: 36rem;">
+
+            <img src="{{guardian.dp}}" style="text-align: center;" alt="" width="570px" height="570px">
+            <p style="font-size:40px">
+
+            <div class="col-md-4 col-sm-4 col-xs-4">
+
+            <div style='margin-left: 20px;' >
+              <br>
+
+        </div>
+        kids under this guardian
+        {{guardian.children}}
+
+        </div>
+
+        </div>
+
+        <br>
+        <br>
+
+
+    </div>
+</div>
+
+{% endblock %}
