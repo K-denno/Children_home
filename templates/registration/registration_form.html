@@ -1,0 +1,72 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mt-5">
+        <!-- Empty div -->
+        <div class="col-md-4"></div>
+        <div class="col-md-4 col-xs-4 col-sm-4">
+            <div class="panel panel-default" style="align-self: center;">
+
+
+
+                <div class="header" style="margin-left: 10%;">
+                    <img src="https://i.imgur.com/zqpwkLQ.png" />
+                </div>
+                <div>
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ form.non_field_errors }}
+                    </div>
+                    {% endif%}
+                </div>
+                <div class="panel-body">
+                    <form action="/auth/register/" style="width: 100%;" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input id="id_email" type="email" name="email" placeholder="Email"
+                                class="form-control {% if form.email.errors %}is-invalid{% endif %}">
+                            <div class="invalid-feedback">
+                                {{ form.email.errors }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input id="id_username" type="text" name="username" placeholder="Username"
+                                class="form-control {% if form.username.errors %}is-invalid{% endif %}">
+                            <div class="invalid-feedback">
+                                {{ form.username.errors }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input id="id_password1" type="password" name="password1" placeholder="Password"
+                                class="form-control {% if form.password1s.errors %}is-invalid{% endif %}">
+                            <div class="invalid-feedback">
+                                {{ form.password1.errors }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input id="id_password2" type="password" name="password2" placeholder="Retype Password"
+                                class="form-control {% if form.password2.errors %}is-invalid{% endif %}">
+                            <div class="invalid-feedback">
+                                {{ form.password2.errors }}
+                            </div>
+                        </div>
+                        <div class="">
+                            <p class="text-muted">Already have an account? <a href="/auth/login/">Login</a></p>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-4"></div>
+        <!-- empty div -->
+    </div>
+</div>
+{% endblock %}

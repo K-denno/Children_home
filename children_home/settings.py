@@ -71,6 +71,9 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_URL = 'index_view'
+
+
 WSGI_APPLICATION = 'children_home.wsgi.application'
 
 
