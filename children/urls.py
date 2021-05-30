@@ -1,7 +1,9 @@
+from django.urls import path
+from . import views
 
-from django.contrib import admin
-from django.conf.urls import url
 
-urlpatterns = [
-    url('admin/', admin.site.urls),
-]
+urlpatterns = {
+    path('', views.Index, name='index_view'),
+    path('authenticate/login/', views.login, name='login_view'),
+    path('authenticate/register/', views.register, name='signout_view'),
+}
