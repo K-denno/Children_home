@@ -1,6 +1,9 @@
+from django.core import validators
 from django.db import models
 from django.contrib.auth.models import User
 from pyuploadcare.dj.models import ImageField, FileField
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 # Create your models here.
 
 
@@ -30,9 +33,10 @@ class Guardians(models.Model):
     idNumber = models.BigIntegerField(null=True, unique=True)
     location = models.CharField(max_length=250)
     dp = ImageField(manual_crop="", blank=True)
-
+    joined_at = models.DateTimeField(auto_now_add=True)
+    
     class Meta:
-        ordering = ["-id"]
+        ordering = ["id"]
 
     def save_guardian(self):
         self.save()
@@ -46,13 +50,15 @@ class Guardians(models.Model):
 
 class Children(models.Model):
     name = models.CharField(max_length=250)
+    age = models.IntegerField(validators = [MinValueValidator(0), MaxValueValidator(17)])
+    gender = models.CharField(max_length=30, null=True)
     birth_cert_number = models.BigIntegerField(null=True, unique=True)
     birth_cert = FileField(blank=True)
     passport = ImageField(manual_crop="1024x1024", blank=True)
     guardian = models.ForeignKey(Guardians, on_delete=models.CASCADE,
         related_name='children', null=True, blank=True)
-
-
+    joined_at = models.DateTimeField(auto_now_add=True)
+    
     class Meta:
         ordering = ["-id"]
 

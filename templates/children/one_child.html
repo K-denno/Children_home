@@ -1,34 +1,77 @@
 {% extends 'common/base.html' %}
 {% load bootstrap5 %}
+{% load static %}
+
 {% block content %}
-
-<div class="row">
-
-    <div class='col-md-4 col-xs-4 col-sm-4'>
-
-        <div class="card" id='{{post.id}}'style="width: 36rem;">
-
-            <img src="{{guardian.dp}}" style="text-align: center;" alt="" width="570px" height="570px">
-            <p style="font-size:40px">
-
-            <div class="col-md-4 col-sm-4 col-xs-4">
-
-            <div style='margin-left: 20px;' >
-              <br>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% if passport %}
+            <img src="{{child.passport.url}}" alt="">
+            {% else %}
+            <img src="{% static 'images/images.png' %}" alt="">
+            {% endif %}
+            <h2>{{child.name}}</h2>
         </div>
-        kids under this guardian
-        {{guardian.children}}
+        <hr>
+    </div>
 
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            <div class="card">
+                <div class="card-header bg-dark">
+                    <h1 class="text-center text-white fw-bold">Child Details</h1>
+                </div>
+                <div class="card-body">
+                    <ul style="list-style-type: circle;">
+                        <li>
+                            <h5>Name - {{child.name}}</h5>
+                        </li>
+                        <li>
+                            <h5>Age - {{child.age}}</h5>
+                        </li>
+                        <li>
+                            <h5>Gender - {{child.gender}}</h5>
+                        </li>
+                        {% if birth_cer_number %}
+                        <li>
+                            <h5>Birth Certificate Number - {{child.birth_cer_number}}</h5>
+                        </li>
+                        {% else %}
+                        <li>
+                            <h5>Birth Certificate Number - Not Available</h5>
+                        </li>
+                        {% endif %}
+                        {% if guardian %}
+                        <li>
+                            <h5>Guardian - {{child.guardian}}</h5>
+                        </li>
+                        {% else %}
+                        <li>
+                            <h5>Guardian - None</h5>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <h5>Joined - {{child.joined_at}}</h5>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer bg-dark">
+                    <a href="" class="btn btn-outline-warning">Update child's info</a>
+                </div>
+            </div>
         </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="mt-5">
+            <footer>
+                <h5 style="text-align: center"> Copyright &copy;
+                    <script>document.write(new Date().getFullYear())</script> <b>Zion</b> All Rights Reserved
+                </h5>
+            </footer>    
         </div>
-
-        <br>
-        <br>
-
-
     </div>
 </div>
-
 {% endblock %}

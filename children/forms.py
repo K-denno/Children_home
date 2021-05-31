@@ -25,4 +25,4 @@ class GuardiansForm(forms.ModelForm):
 class ChildrensForm(forms.ModelForm):
     class Meta:
         model=Children
-        fields=["name", "birth_cert_number", "birth_cert", "passport"]
+        fields=["name", "age", "gender", "birth_cert_number", "birth_cert", "passport", "guardian"]

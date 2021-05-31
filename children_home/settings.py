@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -116,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
