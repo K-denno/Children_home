@@ -1,0 +1,45 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <hr>
+        {% if guardians %}
+        <div class="col-md-12">
+            <h2 class="text-success text-center">Found {{ guardians|length }} name(s) related to the searched term</h2>
+        </div>
+        {% else %}
+        <h2 class="text-danger text-center">Found 0 names related to the searched term</h2>
+        {% endif %}
+    </div>
+
+    <div class="col-md-12 mt-5">
+        <table class="table table-warning table-hover table-striped border">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">ID Number</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Joined</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for guardian in guardians %}
+                <tr class="clickable-row" data-href="/guardian/{{guardian.id}}">
+                    <th scope="row">{{guardian.id}}</th>
+                    <td>{{guardian.email}}</td>
+                    <td>{{guardian.name}}</td>
+                    <td>{{guardian.phoneNumber}}</td>
+                    <td>{{guardian.idNumber}}</td>
+                    <td>{{guardian.location}}</td>
+                    <td>{{guardian.joined_at}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

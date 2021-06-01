@@ -43,6 +43,11 @@ class Guardians(models.Model):
 
     def delete_guardian(self):
         self.delete()
+        
+    @classmethod
+    def search_item(cls, search_term):
+        results = cls.objects.filter(name=search_term)
+        return results
 
     def __str__(self):
         return self.name
@@ -67,6 +72,11 @@ class Children(models.Model):
 
     def delete_child(self):
         self.delete()
+        
+    @classmethod
+    def search_item(cls, search_term):
+        results = cls.objects.filter(name=search_term)
+        return results
 
     def __str__(self):
         return self.name

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from .models import Guardians, Children
 from .forms import GuardiansForm, ChildrensForm, SignUpForm
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -66,3 +67,45 @@ def one_child(request, pk):
 @login_required(login_url='/auth/login')
 def addChildren(request):
     return redirect("children")
+
+@login_required(login_url='/auth/login')
+def search_child(request):
+    if 'child' in request.GET and request.GET["child"]:
+        search_term = request.GET.get("name")
+        print(search_term)
+        try:
+            children = Children.objects.get(name=search_term)
+            searched_child = Children.search_item(children)
+            print(searched_child)
+
+            return render(request, 'children/search.html', {'children': searched_child})
+
+        except ObjectDoesNotExist:
+            message = "No child found"
+            children = Children.objects.all()
+            return render(request, "children/search.html", {"message": message, "children": children})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'children/search.html', {'message': message})
+
+@login_required(login_url='/auth/login')
+def search_guardian(request):
+    if 'guardian' in request.GET and request.GET["guardian"]:
+        search_term = request.GET.get("name")
+        print(search_term)
+        try:
+            guardians = Guardians.objects.get(name=search_term)
+            searched_guardian = Guardians.search_item(guardians)
+            print(searched_guardian)
+
+            return render(request, 'guardian/search.html', {'guardians': searched_guardian})
+
+        except ObjectDoesNotExist:
+            message = "No guardian found"
+            children = Children.objects.all()
+            return render(request, "guardian/search.html", {"message": message, "guardian": guardians})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'guardian/search.html', {'message': message})

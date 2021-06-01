@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            {% if passport %}
+            {% if guardian.passport %}
             <img src="{{guardian.passport.url}}" alt="">
             {% else %}
             <img src="{% static 'images/images.png' %}" alt="">
@@ -20,7 +20,7 @@
         <div class="col-md-12 mt-5">
             <div class="card">
                 <div class="card-header bg-dark">
-                    <h1 class="text-center text-white fw-bold">Child Details</h1>
+                    <h1 class="text-center text-white fw-bold">Guardian Details</h1>
                 </div>
                 <div class="card-body">
                     <ul style="list-style-type: circle;">
