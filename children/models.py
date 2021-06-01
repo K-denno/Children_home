@@ -1,3 +1,4 @@
+from re import T
 from django.core import validators
 from django.db import models
 from django.contrib.auth.models import User
@@ -46,8 +47,12 @@ class Guardians(models.Model):
         
     @classmethod
     def search_item(cls, search_term):
-        results = cls.objects.filter(name=search_term)
+        results = cls.objects.filter(name__icontains=search_term)
         return results
+    
+    @classmethod
+    def update_guardian(cls, id, name, phoneNumber, email, location, dp):
+        cls.objects.filter(id=id).update(name=name, phoneNumber=phoneNumber, email=email,location=location, dp=dp)
 
     def __str__(self):
         return self.name
@@ -55,7 +60,7 @@ class Guardians(models.Model):
 
 class Children(models.Model):
     name = models.CharField(max_length=250)
-    age = models.IntegerField(validators = [MinValueValidator(0), MaxValueValidator(17)])
+    dob = models.DateTimeField()
     gender = models.CharField(max_length=30, null=True)
     birth_cert_number = models.BigIntegerField(null=True, unique=True)
     birth_cert = FileField(blank=True)
@@ -63,6 +68,9 @@ class Children(models.Model):
     guardian = models.ForeignKey(Guardians, on_delete=models.CASCADE,
         related_name='children', null=True, blank=True)
     joined_at = models.DateTimeField(auto_now_add=True)
+    school = models.CharField(max_length=100, blank=True)
+    medical_records = models.FileField(blank=True)
+    school_report = models.FileField(blank=True)
     
     class Meta:
         ordering = ["-id"]
@@ -75,8 +83,12 @@ class Children(models.Model):
         
     @classmethod
     def search_item(cls, search_term):
-        results = cls.objects.filter(name=search_term)
+        results = cls.objects.filter(name__icontains=search_term)
         return results
+    
+    @classmethod
+    def update_guardian(cls, id, name, passport, guardian):
+        cls.objects.filter(id=id).update(name=name, passport=passport, guardian=guardian)
 
     def __str__(self):
         return self.name

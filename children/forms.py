@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import widgets
 from .models import Guardians, Children
 from django.contrib.auth.models import User
 from pyuploadcare.dj.forms import ImageField
@@ -21,8 +22,24 @@ class GuardiansForm(forms.ModelForm):
         model=Guardians
         fields=["name", "phoneNumber", "email", "idNumber", "location", "dp"]
 
-
+class DateInput(forms.DateInput):
+    input_type = 'date'
+    
 class ChildrensForm(forms.ModelForm):
     class Meta:
         model=Children
-        fields=["name", "age", "gender", "birth_cert_number", "birth_cert", "passport", "guardian"]
+        fields=["name", "dob", "gender", "birth_cert_number", "birth_cert", "passport", "guardian", "school", "school_report", "medical_records"]
+        widgets = {
+            'dob': DateInput(),
+        }
+        
+
+class ChildrensUpdateForm(forms.ModelForm):
+    class Meta:
+        model=Children
+        fields=["passport", "guardian", "school", "school_report", "medical_records"]
+        
+class UpdateGuardiansForm(forms.ModelForm):
+    class Meta:
+        model=Guardians
+        fields=["name", "phoneNumber", "email", "idNumber", "location", "dp"]

@@ -1,4 +1,6 @@
+import re
 import django
+from django.core.checks import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
@@ -70,42 +72,40 @@ def addChildren(request):
 
 @login_required(login_url='/auth/login')
 def search_child(request):
-    if 'child' in request.GET and request.GET["child"]:
-        search_term = request.GET.get("name")
-        print(search_term)
-        try:
-            children = Children.objects.get(name=search_term)
-            searched_child = Children.search_item(children)
-            print(searched_child)
-
-            return render(request, 'children/search.html', {'children': searched_child})
-
-        except ObjectDoesNotExist:
-            message = "No child found"
-            children = Children.objects.all()
-            return render(request, "children/search.html", {"message": message, "children": children})
-
+    if 'name' in request.GET and request.GET['name']:
+        search_term = request.GET.get('name')
+        searched_children = Children.search_item(search_term)
+        message = f"{search_term}"
+        
+        return render(request, "children/search.html", {"message": message, "children": searched_children})
+    
     else:
         message = "You haven't searched for any term"
-        return render(request, 'children/search.html', {'message': message})
-
+        return render(request, "children/search.html", {"message": message})
+    
 @login_required(login_url='/auth/login')
 def search_guardian(request):
-    if 'guardian' in request.GET and request.GET["guardian"]:
-        search_term = request.GET.get("name")
-        print(search_term)
-        try:
-            guardians = Guardians.objects.get(name=search_term)
-            searched_guardian = Guardians.search_item(guardians)
-            print(searched_guardian)
-
-            return render(request, 'guardian/search.html', {'guardians': searched_guardian})
-
-        except ObjectDoesNotExist:
-            message = "No guardian found"
-            children = Children.objects.all()
-            return render(request, "guardian/search.html", {"message": message, "guardian": guardians})
-
+    if 'name' in request.GET and request.GET['name']:
+        search_term = request.GET.get('name')
+        searched_guardians = Guardians.search_item(search_term)
+        message = f"{search_term}"
+        
+        return render(request, "guardians/search.html", {"message": message, "guardians": searched_guardians})
+    
     else:
         message = "You haven't searched for any term"
-        return render(request, 'guardian/search.html', {'message': message})
+        return render(request, "guardians/search.html", {"message": message})
+        
+        
+@login_required(login_url='/auth/login')
+def update_child(request):
+    # child = Children.objects.get(id=pk)
+    
+    return render(request, "children/update.html")
+
+
+@login_required(login_url='/auth/login')
+def update_guardian(request):
+    # child = Children.objects.get(id=pk)
+    
+    return render(request, "guardians/update.html")
