@@ -1,0 +1,44 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <hr>
+        {% if children %}
+        <div class="col-md-12">
+            <h2 class="text-success text-center">Found {{ children|length }} name(s) related to the searched term</h2>
+        </div>
+        {% else %}
+        <h2 class="text-danger text-center">Found 0 names related to the searched term</h2>
+        {% endif %}
+    </div>
+    <div class="col-md-12 mt-5">
+        <table class="table table-warning table-hover table-striped border">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Birth Certificate Number</th>
+                    <th scope="col">Guardian</th>
+                    <th scope="col">Joined</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for child in children %}
+                <tr class="clickable-row" data-href="/child/{{child.id}}">
+                    <th scope="row">{{child.id}}</th>
+                    <td>{{child.name}}</td>
+                    <td>{{child.age}}</td>
+                    <td>{{child.gender}}</td>
+                    <td>{{child.birth_cer_number}}</td>
+                    <td>{{child.guardian}}</td>
+                    <td>{{child.joined_at}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            {% if arr %}
+            <h2 class="text-center"> Found {{arr|length}} of searched term</h2>
+            {% else %}
+            <h2 class="text-center text-danger">Found o results</h2>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

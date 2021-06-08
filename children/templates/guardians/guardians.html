@@ -1,0 +1,79 @@
+{% extends 'common/base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Register Guardian
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Register Guardian</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" style="width: 100%;" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% bootstrap_form forms %}
+                                <br><br><br>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary btn-sm" value="Add Guardian">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <form class="d-flex mt-2" action="{% url 'search_guardian' %}">
+                <input class="form-control me-2" type="search" placeholder="Search Guardian" aria-label="Search" name="name">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="col-md-12 mt-5">
+            <table class="table table-warning table-hover table-striped border">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">ID Number</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for guardian in guardians %}
+                    <tr class="clickable-row" data-href="/guardian/{{guardian.id}}">
+                        <th scope="row">{{guardian.id}}</th>
+                        <td>{{guardian.email}}</td>
+                        <td>{{guardian.name}}</td>
+                        <td>{{guardian.phoneNumber}}</td>
+                        <td>{{guardian.idNumber}}</td>
+                        <td>{{guardian.location}}</td>
+                        <td>{{guardian.joined_at}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'common/base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Register Child
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Register Child</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" style="width: 100%;" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% bootstrap_form forms %}
+                                <br><br><br>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary btn-sm" value="Add Child">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="d-flex mt-2" action="{% url 'search_child' %}">
+                <input class="form-control me-2" type="search" placeholder="Search Child" aria-label="Search" name="name">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+        </div>
+        <div class="col-md-12 mt-5">
+            <table class="table table-warning table-hover table-striped border">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">DOB</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Birth Certificate Number</th>
+                        <th scope="col">Guardian</th>
+                        <th scope="col">Joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for child in children %}
+                    <tr class="clickable-row" data-href="/child/{{child.id}}">
+                        <th scope="row">{{child.id}}</th>
+                        <td>{{child.name}}</td>
+                        <td>{{child.dob}}</td>
+                        <td>{{child.gender}}</td>
+                        <td>{{child.birth_cert_number}}</td>
+                        <td>{{child.guardian}}</td>
+                        <td>{{child.joined_at}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

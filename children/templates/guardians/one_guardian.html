@@ -1,0 +1,65 @@
+{% extends 'common/base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% if guardian.passport %}
+            <img src="{{guardian.passport.url}}" alt="">
+            {% else %}
+            <img src="{% static 'images/images.png' %}" alt="">
+            {% endif %}
+            <h2>{{guardian.name}}</h2>
+        </div>
+        <hr>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            <div class="card">
+                <div class="card-header bg-dark">
+                    <h1 class="text-center text-white fw-bold">Guardian Details</h1>
+                </div>
+                <div class="card-body">
+                    <ul style="list-style-type: circle;">
+                        <li>
+                            <h5>Name - {{guardian.name}}</h5>
+                        </li>
+                        <li>
+                            <h5>Email - {{guardian.email}}</h5>
+                        </li>
+                        <li>
+                            <h5>Phone Number - {{guardian.phoneNumber}}</h5>
+                        </li>
+                        <li>
+                            <h5>ID Number - {{guardian.idNumber}}</h5>
+                        </li>
+                        <li>
+                            <h5>Location - {{guardian.location}}</h5>
+                        </li>
+                        <li>
+                            <h5>Joined - {{guardian.joined_at}}</h5>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer bg-dark">
+                    <a href="{% url 'update_guardian' %}" class="btn btn-outline-warning">Update guardian's info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="mt-5">
+            <footer>
+                <h5 style="text-align: center"> Copyright &copy;
+                    <script>document.write(new Date().getFullYear())</script> <b>Zion</b> All Rights Reserved
+                </h5>
+            </footer>    
+        </div>
+    </div>
+</div>
+{% endblock %}
