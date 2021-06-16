@@ -68,8 +68,7 @@ class Children(models.Model):
     name = models.CharField(max_length=250)
     dob = models.DateTimeField()
     gender = models.CharField(max_length=30, null=True, choices=genders)
-    birth_cert_number = models.BigIntegerField(null=True, unique=True)
-    birth_cert = FileField(blank=True)
+    upi_number = models.BigIntegerField(null=True)
     passport = ImageField(manual_crop="1024x1024", blank=True)
     guardian = models.ForeignKey(Guardians, on_delete=models.CASCADE,
         related_name='children', null=True, blank=True)
