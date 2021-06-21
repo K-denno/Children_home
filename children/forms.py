@@ -28,7 +28,7 @@ class DateInput(forms.DateInput):
 class ChildrensForm(forms.ModelForm):
     class Meta:
         model=Children
-        fields=["name", "dob", "gender", "upi_number", "passport", "guardian", "school"]
+        fields=["name", "dob", "gender", "upi_number", "birth_cert", "passport", "guardian", "school"]
         widgets = {
             'dob': DateInput(),
         }
